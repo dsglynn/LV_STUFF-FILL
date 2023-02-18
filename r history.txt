@@ -1,0 +1,1927 @@
+
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.70 (7657) x86_64-apple-darwin15.6.0]
+
+[Workspace restored from /Users/dsg/.RData]
+[History restored from /Users/dsg/.Rapp.history]
+
+> df <- read.table(file.choose(), header=T, sep="\t")
+> summary(df)
+                     Filename      Subject       Production.Type                      Profile.Fine        Profile.Coarse   Dimension1        Dimension2    
+ PN.C1.2019.01.FRN.3.SYN1:  1   Subj1  :  2   Handwritten:58     Highly digital             :24    Pref-digital  :60     Min.   :-14.370   Min.   :-7.380  
+ PN.C1.2019.01.FRN.3.SYN2:  1   Subj10 :  2   Typed      :58     Highly manuscrit           :18    Pref-manuscrit:56     1st Qu.:  1.242   1st Qu.:-5.700  
+ PN.C1.2019.02.FRN.1.SYN1:  1   Subj11 :  2                      More digital than manuscrit:36                          Median :  6.530   Median :-4.040  
+ PN.C1.2019.02.FRN.1.SYN2:  1   Subj12 :  2                      More manuscrit than digital:38                          Mean   :  7.085   Mean   :-3.302  
+ PN.C1.2019.03.FRN.3.SYN1:  1   Subj13 :  2                                                                              3rd Qu.: 11.617   3rd Qu.:-1.238  
+ PN.C1.2019.03.FRN.3.SYN2:  1   Subj14 :  2                                                                              Max.   : 41.740   Max.   : 6.350  
+ (Other)                 :110   (Other):104                                                                                                                
+   Dimension3       Dimension4        Dimension5       Dimension6            AMP              ANDC             BEMA            BYPA             CAUS       
+ Min.   :-2.970   Min.   :-9.2700   Min.   :-3.920   Min.   :-3.50000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.: 6.180   1st Qu.:-3.1525   1st Qu.:-1.425   1st Qu.:-2.53250   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:1.450   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median : 9.390   Median :-0.2550   Median : 0.945   Median :-0.38500   Median :0.0000   Median :0.5700   Median :2.385   Median :0.0000   Median :0.0000  
+ Mean   : 9.966   Mean   : 0.3084   Mean   : 1.762   Mean   : 0.06147   Mean   :0.2221   Mean   :0.7032   Mean   :2.348   Mean   :0.1136   Mean   :0.4079  
+ 3rd Qu.:12.533   3rd Qu.: 3.8375   3rd Qu.: 3.650   3rd Qu.: 1.57500   3rd Qu.:0.2900   3rd Qu.:1.0575   3rd Qu.:2.950   3rd Qu.:0.0000   3rd Qu.:0.6200  
+ Max.   :33.850   Max.   :24.0400   Max.   :21.220   Max.   :11.71000   Max.   :6.0600   Max.   :3.7000   Max.   :6.060   Max.   :1.8500   Max.   :3.9600  
+                                                                                                                                                           
+      CONC              COND             CONJ             CONT             DEMO             DEMP             DPAR               DWNT              EMPH       
+ Min.   :0.00000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000000   Min.   :0.00000   Min.   :0.0000  
+ 1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.000000   1st Qu.:0.00000   1st Qu.:0.2700  
+ Median :0.00000   Median :0.0000   Median :0.4150   Median :0.0000   Median :0.4250   Median :0.3850   Median :0.000000   Median :0.00000   Median :0.7500  
+ Mean   :0.01862   Mean   :0.1725   Mean   :0.4714   Mean   :0.4354   Mean   :0.6284   Mean   :0.4973   Mean   :0.006552   Mean   :0.06776   Mean   :0.9652  
+ 3rd Qu.:0.00000   3rd Qu.:0.2100   3rd Qu.:0.7525   3rd Qu.:0.7025   3rd Qu.:0.9600   3rd Qu.:0.8125   3rd Qu.:0.000000   3rd Qu.:0.00000   3rd Qu.:1.5225  
+ Max.   :1.18000   Max.   :1.3800   Max.   :2.1300   Max.   :3.8800   Max.   :4.6900   Max.   :2.2100   Max.   :0.420000   Max.   :1.14000   Max.   :3.8500  
+                                                                                                                                                             
+       EX              FPP1              GER             HDG               INPR         JJ              NEMD              NN             NOMZ       
+ Min.   :0.0000   Min.   : 0.0000   Min.   :0.000   Min.   :0.00000   Min.   :0   Min.   : 0.000   Min.   :0.0000   Min.   : 7.90   Min.   : 0.000  
+ 1st Qu.:0.0000   1st Qu.: 0.5825   1st Qu.:0.285   1st Qu.:0.00000   1st Qu.:0   1st Qu.: 5.775   1st Qu.:0.0000   1st Qu.:15.96   1st Qu.: 3.740  
+ Median :0.0000   Median : 1.4900   Median :1.160   Median :0.00000   Median :0   Median : 7.400   Median :0.0000   Median :18.64   Median : 5.250  
+ Mean   :0.3003   Mean   : 2.3196   Mean   :1.336   Mean   :0.02388   Mean   :0   Mean   : 7.612   Mean   :0.2032   Mean   :18.49   Mean   : 5.360  
+ 3rd Qu.:0.5250   3rd Qu.: 3.4550   3rd Qu.:1.992   3rd Qu.:0.00000   3rd Qu.:0   3rd Qu.: 9.123   3rd Qu.:0.2375   3rd Qu.:20.83   3rd Qu.: 6.537  
+ Max.   :2.7600   Max.   :10.2000   Max.   :4.790   Max.   :1.13000   Max.   :0   Max.   :17.240   Max.   :2.6000   Max.   :29.14   Max.   :14.880  
+                                                                                                                                                    
+      OSUB             PASS            PASTP              PEAS             PHC             PIN              PIRE              PIT            PLACE        
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.00000   Min.   :0.0000   Min.   :0.000   Min.   : 3.030   Min.   :0.00000   Min.   :0.000   Min.   :0.00000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.760   1st Qu.: 7.107   1st Qu.:0.00000   1st Qu.:1.040   1st Qu.:0.00000  
+ Median :0.0000   Median :0.7600   Median :0.00000   Median :0.0000   Median :1.320   Median : 8.605   Median :0.00000   Median :1.670   Median :0.00000  
+ Mean   :0.1203   Mean   :0.9161   Mean   :0.01733   Mean   :0.1686   Mean   :1.618   Mean   : 8.568   Mean   :0.02647   Mean   :1.890   Mean   :0.03888  
+ 3rd Qu.:0.0000   3rd Qu.:1.3675   3rd Qu.:0.00000   3rd Qu.:0.2250   3rd Qu.:2.100   3rd Qu.:10.193   3rd Qu.:0.00000   3rd Qu.:2.553   3rd Qu.:0.00000  
+ Max.   :2.2400   Max.   :3.5500   Max.   :0.57000   Max.   :1.9600   Max.   :7.410   Max.   :14.910   Max.   :0.90000   Max.   :5.920   Max.   :0.56000  
+                                                                                                                                                          
+      POMD             PRED             PRESP             PRIV            PRMD             PROD             PUBV              RB             SERE       
+ Min.   :0.0000   Min.   : 0.0000   Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   :0.0000  
+ 1st Qu.:0.7075   1st Qu.: 0.6175   1st Qu.:0.0000   1st Qu.:1.865   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:2.260   1st Qu.:0.0000  
+ Median :1.3400   Median : 1.1600   Median :0.0000   Median :2.735   Median :0.0000   Median :0.0000   Median :0.0000   Median :3.220   Median :0.0000  
+ Mean   :1.4533   Mean   : 1.3981   Mean   :0.2178   Mean   :2.842   Mean   :0.3747   Mean   :0.1539   Mean   :0.4216   Mean   :3.401   Mean   :0.1324  
+ 3rd Qu.:2.1325   3rd Qu.: 1.8500   3rd Qu.:0.4175   3rd Qu.:3.590   3rd Qu.:0.5450   3rd Qu.:0.2250   3rd Qu.:0.6500   3rd Qu.:4.345   3rd Qu.:0.0000  
+ Max.   :4.3900   Max.   :12.1200   Max.   :1.7200   Max.   :7.860   Max.   :4.6100   Max.   :1.4900   Max.   :3.2900   Max.   :8.840   Max.   :2.0400  
+                                                                                                                                                        
+      SMP               SPAU             SPIN              SPP2            STPR              SUAV             SYNE              THAC             THATD       
+ Min.   :0.00000   Min.   :0.0000   Min.   :0.00000   Min.   :0.000   Min.   :0.00000   Min.   :0.0000   Min.   :0.00000   Min.   :0.00000   Min.   :0.0000  
+ 1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.0000  
+ Median :0.00000   Median :0.0000   Median :0.00000   Median :0.000   Median :0.00000   Median :0.0000   Median :0.00000   Median :0.00000   Median :0.0000  
+ Mean   :0.04914   Mean   :0.4087   Mean   :0.01267   Mean   :1.131   Mean   :0.02569   Mean   :0.2291   Mean   :0.04267   Mean   :0.01698   Mean   :0.3699  
+ 3rd Qu.:0.00000   3rd Qu.:0.6400   3rd Qu.:0.00000   3rd Qu.:1.593   3rd Qu.:0.00000   3rd Qu.:0.4050   3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:0.5700  
+ Max.   :1.08000   Max.   :4.0800   Max.   :0.51000   Max.   :8.720   Max.   :0.90000   Max.   :1.3200   Max.   :0.85000   Max.   :1.18000   Max.   :3.9200  
+                                                                                                                                                             
+      THVC             TIME              TO             TOBJ             TPP3             TSUB             VBD             VPRT             WHCL       
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.000   Min.   : 0.830   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:1.222   1st Qu.:0.0000   1st Qu.:0.9325   1st Qu.:0.0000   1st Qu.:0.000   1st Qu.: 5.770   1st Qu.:0.0000  
+ Median :0.4450   Median :0.0000   Median :2.385   Median :0.0000   Median :1.8450   Median :0.0000   Median :1.030   Median : 7.350   Median :0.0000  
+ Mean   :0.5979   Mean   :0.1268   Mean   :2.554   Mean   :0.1395   Mean   :2.1108   Mean   :0.1665   Mean   :1.474   Mean   : 7.274   Mean   :0.1028  
+ 3rd Qu.:0.9825   3rd Qu.:0.0000   3rd Qu.:3.743   3rd Qu.:0.0000   3rd Qu.:2.8800   3rd Qu.:0.2250   3rd Qu.:1.972   3rd Qu.: 8.902   3rd Qu.:0.0000  
+ Max.   :3.1700   Max.   :1.3000   Max.   :7.410   Max.   :1.8500   Max.   :8.7900   Max.   :1.5600   Max.   :7.890   Max.   :14.850   Max.   :1.2900  
+                                                                                                                                                       
+     WHOBJ              WHQU             WHSUB            WZPAST            WZPRES            XX0             Tokens           AWL             TTR        
+ Min.   :0.00000   Min.   :0.00000   Min.   :0.0000   Min.   :0.00000   Min.   :0.0000   Min.   :0.0000   Min.   : 33.0   Min.   :4.230   Min.   : 28.00  
+ 1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:132.8   1st Qu.:4.668   1st Qu.: 84.75  
+ Median :0.00000   Median :0.00000   Median :0.0000   Median :0.00000   Median :0.0000   Median :0.3600   Median :180.0   Median :4.905   Median :104.00  
+ Mean   :0.01095   Mean   :0.03578   Mean   :0.1962   Mean   :0.07948   Mean   :0.2452   Mean   :0.4066   Mean   :205.1   Mean   :4.929   Mean   :111.19  
+ 3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:0.3750   3rd Qu.:0.00000   3rd Qu.:0.4650   3rd Qu.:0.6450   3rd Qu.:243.2   3rd Qu.:5.140   3rd Qu.:134.00  
+ Max.   :0.88000   Max.   :1.16000   Max.   :1.3900   Max.   :1.85000   Max.   :1.3600   Max.   :1.9600   Max.   :609.0   Max.   :5.870   Max.   :213.00  
+                                                                                                                                                          
+> M = glm(Production.Type ~ Dimension1 +  Dimension2, data = df, family = "binomial")
+> summary(M)
+
+Call:
+glm(formula = Production.Type ~ Dimension1 + Dimension2, family = "binomial", 
+    data = df)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.64193  -1.11581  -0.01246   1.16570   1.44215  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  0.44218    0.31858   1.388    0.165
+Dimension1  -0.01923    0.01951  -0.986    0.324
+Dimension2   0.09206    0.06400   1.438    0.150
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 160.81  on 115  degrees of freedom
+Residual deviance: 157.63  on 113  degrees of freedom
+AIC: 163.63
+
+Number of Fisher Scoring iterations: 4
+
+> M = glm(Production.Type ~ Dimension1 +  Dimension2 Dimension3  +     Dimension4   +     Dimension5    +   Dimension6     +       AMP         +     ANDC   +          BEMA       +     BYPA     +        CAUS, data = df, family = "binomial")
+Error: unexpected symbol in "M = glm(Production.Type ~ Dimension1 +  Dimension2 Dimension3"
+> M = glm(Production.Type ~ Dimension1 +  Dimension2 + Dimension3  +     Dimension4   +     Dimension5    +   Dimension6     +       AMP         +     ANDC   +          BEMA       +     BYPA     +        CAUS, data = df, family = "binomial")
+> summary(M)
+
+Call:
+glm(formula = Production.Type ~ Dimension1 + Dimension2 + Dimension3 + 
+    Dimension4 + Dimension5 + Dimension6 + AMP + ANDC + BEMA + 
+    BYPA + CAUS, family = "binomial", data = df)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.80058  -1.05676   0.09514   1.12858   1.62054  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept)  0.052609   0.627399   0.084    0.933
+Dimension1  -0.028372   0.029984  -0.946    0.344
+Dimension2   0.076897   0.071620   1.074    0.283
+Dimension3  -0.008894   0.034677  -0.256    0.798
+Dimension4   0.033728   0.038159   0.884    0.377
+Dimension5   0.015933   0.045126   0.353    0.724
+Dimension6   0.040067   0.066260   0.605    0.545
+AMP         -0.060496   0.433519  -0.140    0.889
+ANDC         0.277108   0.271006   1.023    0.307
+BEMA         0.054732   0.174123   0.314    0.753
+BYPA         0.971735   0.833526   1.166    0.244
+CAUS         0.078245   0.419003   0.187    0.852
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 160.81  on 115  degrees of freedom
+Residual deviance: 152.98  on 104  degrees of freedom
+AIC: 176.98
+
+Number of Fisher Scoring iterations: 4
+
+> M = glm(Production.Type ~ Dimension1  +	Dimension2+ 	Dimension3 +	Dimension4 	+Dimension5+ 	Dimension6 +	AMP +	ANDC 	+BEMA +	BYPA 	+CAUS 	+CONC +	COND +	CONJ +	CONT 	+DEMO 	+DEMP 	+DPAR +	DWNT 	+EMPH +	EX 	+FPP1 	+GER +	HDG +	INPR +	JJ +	NEMD +	NN +	NOMZ +	OSUB +	PASS +	PASTP +	PEAS +	PHC +	PIN +	PIRE +	PIT +	PLACE +	POMD +	PRED +	PRESP +	PRIV +	PRMD +	PROD +	PUBV +	RB 	+ SERE +	SMP +	SPAU +	SPIN +	SPP2 +	STPR 	+SUAV 	+SYNE +	THAC +	THATD 	+THVC +	TIME +	TO +	TOBJ +	TPP3 +	TSUB +	VBD+ 	VPRT +	WHCL +	WHOBJ +	WHQU 	+WHSUB +	WZPAST +	WZPRES +	XX0, data = df, family = "binomial")
+Warning messages:
+1: glm.fit: algorithm did not converge 
+2: glm.fit: fitted probabilities numerically 0 or 1 occurred 
+> summary(M)
+
+Call:
+glm(formula = Production.Type ~ Dimension1 + Dimension2 + Dimension3 + 
+    Dimension4 + Dimension5 + Dimension6 + AMP + ANDC + BEMA + 
+    BYPA + CAUS + CONC + COND + CONJ + CONT + DEMO + DEMP + DPAR + 
+    DWNT + EMPH + EX + FPP1 + GER + HDG + INPR + JJ + NEMD + 
+    NN + NOMZ + OSUB + PASS + PASTP + PEAS + PHC + PIN + PIRE + 
+    PIT + PLACE + POMD + PRED + PRESP + PRIV + PRMD + PROD + 
+    PUBV + RB + SERE + SMP + SPAU + SPIN + SPP2 + STPR + SUAV + 
+    SYNE + THAC + THATD + THVC + TIME + TO + TOBJ + TPP3 + TSUB + 
+    VBD + VPRT + WHCL + WHOBJ + WHQU + WHSUB + WZPAST + WZPRES + 
+    XX0, family = "binomial", data = df)
+
+Deviance Residuals: 
+       Min          1Q      Median          3Q         Max  
+-9.957e-06  -2.515e-06   0.000e+00   2.582e-06   1.065e-05  
+
+Coefficients: (1 not defined because of singularities)
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept) -2.379e+04  2.585e+08       0        1
+Dimension1  -1.260e+00  9.495e+04       0        1
+Dimension2  -2.672e+03  2.116e+07       0        1
+Dimension3  -2.098e+02  1.803e+07       0        1
+Dimension4   1.013e+02  2.713e+07       0        1
+Dimension5  -1.660e+02  5.615e+07       0        1
+Dimension6  -1.414e+03  4.864e+07       0        1
+AMP          2.281e+01  4.817e+05       0        1
+ANDC        -3.191e+00  2.600e+05       0        1
+BEMA         1.733e-01  1.846e+05       0        1
+BYPA         3.024e+01  7.630e+05       0        1
+CAUS        -4.062e+00  5.364e+05       0        1
+CONC         8.723e+01  3.703e+05       0        1
+COND        -4.691e+02  1.235e+08       0        1
+CONJ         1.033e+03  3.510e+08       0        1
+CONT        -8.511e+00  1.692e+05       0        1
+DEMO         3.368e+03  1.159e+08       0        1
+DEMP         1.541e+01  2.662e+05       0        1
+DPAR        -1.339e+02  2.169e+06       0        1
+DWNT         1.240e+01  5.198e+05       0        1
+EMPH         1.885e+01  1.173e+05       0        1
+EX           1.618e+00  3.931e+05       0        1
+FPP1        -1.500e-01  8.017e+04       0        1
+GER         -4.816e+00  1.193e+05       0        1
+HDG         -3.549e+01  6.187e+05       0        1
+INPR                NA         NA      NA       NA
+JJ          -9.018e+00  9.535e+04       0        1
+NEMD        -5.075e+02  1.292e+08       0        1
+NN          -4.212e+00  5.812e+04       0        1
+NOMZ         1.381e+02  1.252e+07       0        1
+OSUB         1.512e+03  5.105e+08       0        1
+PASS         2.510e+02  8.488e+07       0        1
+PASTP       -1.383e+01  1.617e+06       0        1
+PEAS         5.142e+03  4.046e+07       0        1
+PHC          7.722e+02  6.679e+07       0        1
+PIN          2.143e+00  1.040e+05       0        1
+PIRE         4.639e+01  8.573e+05       0        1
+PIT         -8.277e+00  1.105e+05       0        1
+PLACE       -5.873e+02  5.320e+07       0        1
+POMD         9.067e+00  3.582e+05       0        1
+PRED        -1.205e+01  1.567e+05       0        1
+PRESP        1.574e+04  1.245e+08       0        1
+PRIV        -1.767e+01  2.036e+05       0        1
+PRMD        -2.316e+02  6.458e+07       0        1
+PROD         2.701e+01  4.430e+05       0        1
+PUBV         4.961e+03  3.931e+07       0        1
+RB          -1.300e+02  1.021e+07       0        1
+SERE         3.240e+00  3.267e+05       0        1
+SMP          2.046e+01  1.123e+06       0        1
+SPAU        -4.006e+02  1.084e+08       0        1
+SPIN         1.673e+01  1.413e+06       0        1
+SPP2        -4.214e+00  7.480e+04       0        1
+STPR         2.954e+00  1.493e+06       0        1
+SUAV        -3.441e+02  8.774e+07       0        1
+SYNE         1.667e+04  1.320e+08       0        1
+THAC         2.696e+01  7.884e+05       0        1
+THATD       -2.204e+01  3.925e+05       0        1
+THVC         4.874e+03  1.676e+08       0        1
+TIME        -5.912e+02  5.140e+07       0        1
+TO          -1.812e+02  4.836e+07       0        1
+TOBJ        -1.564e+01  7.599e+05       0        1
+TPP3         1.191e+03  9.457e+06       0        1
+TSUB        -2.577e+01  2.737e+05       0        1
+VBD          8.770e+02  7.047e+06       0        1
+VPRT         3.739e+00  1.266e+05       0        1
+WHCL         4.725e+01  5.375e+05       0        1
+WHOBJ        1.188e+03  1.058e+08       0        1
+WHQU        -3.010e+00  6.550e+05       0        1
+WHSUB        1.035e+03  9.019e+07       0        1
+WZPAST       5.036e+02  1.818e+08       0        1
+WZPRES      -1.278e+01  4.006e+05       0        1
+XX0          2.544e+01  2.764e+05       0        1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1.6081e+02  on 115  degrees of freedom
+Residual deviance: 2.0284e-09  on  45  degrees of freedom
+AIC: 142
+
+Number of Fisher Scoring iterations: 25
+
+> M = glm(Production.Type ~ WHSUB +	WZPAST +	WZPRES +	XX0, data = df, family = "binomial")
+> summary(M)
+
+Call:
+glm(formula = Production.Type ~ WHSUB + WZPAST + WZPRES + XX0, 
+    family = "binomial", data = df)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.69575  -1.09360  -0.02996   1.17253   1.45822  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -0.2688     0.3104  -0.866    0.386
+WHSUB         0.3594     0.5640   0.637    0.524
+WZPAST        0.7238     0.8139   0.889    0.374
+WZPRES       -0.4814     0.5210  -0.924    0.355
+XX0           0.6445     0.4216   1.529    0.126
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 160.81  on 115  degrees of freedom
+Residual deviance: 156.49  on 111  degrees of freedom
+AIC: 166.49
+
+Number of Fisher Scoring iterations: 4
+
+> M = glm(Production.Type ~ 	AMP +	ANDC 	+BEMA +	BYPA 	+CAUS 	+CONC +	COND +	CONJ +	CONT 	+DEMO 	+DEMP 	+DPAR +	DWNT 	+EMPH +	EX 	+FPP1 	+GER +	HDG +	INPR +	JJ +	NEMD +	NN +	NOMZ +	OSUB +	PASS +	PASTP +	PEAS +	PHC +	PIN +	PIRE +	PIT +	PLACE +	POMD +	PRED +	PRESP +	PRIV +	PRMD +	PROD +	PUBV +	RB 	+ SERE +	SMP +	SPAU +	SPIN +	SPP2 +	STPR 	+SUAV 	+SYNE +	THAC +	THATD 	+THVC +	TIME +	TO +	TOBJ +	TPP3 +	TSUB +	VBD+ 	VPRT +	WHCL +	WHOBJ +	WHQU 	+WHSUB +	WZPAST +	WZPRES +	XX0, data = df, family = "binomial")
+Warning messages:
+1: glm.fit: algorithm did not converge 
+2: glm.fit: fitted probabilities numerically 0 or 1 occurred 
+> M = glm(Production.Type ~ 	PIRE +	PIT +	PLACE +	POMD +	PRED +	PRESP +	PRIV +	PRMD +	PROD +	PUBV +	RB 	+ SERE +	SMP +	SPAU +	SPIN +	SPP2 +	STPR 	+SUAV 	+SYNE +	THAC +	THATD 	+THVC +	TIME +	TO +	TOBJ +	TPP3 +	TSUB +	VBD+ 	VPRT +	WHCL +	WHOBJ +	WHQU 	+WHSUB +	WZPAST +	WZPRES +	XX0, data = df, family = "binomial")
+Warning message:
+glm.fit: fitted probabilities numerically 0 or 1 occurred 
+> summary(M)
+
+Call:
+glm(formula = Production.Type ~ PIRE + PIT + PLACE + POMD + PRED + 
+    PRESP + PRIV + PRMD + PROD + PUBV + RB + SERE + SMP + SPAU + 
+    SPIN + SPP2 + STPR + SUAV + SYNE + THAC + THATD + THVC + 
+    TIME + TO + TOBJ + TPP3 + TSUB + VBD + VPRT + WHCL + WHOBJ + 
+    WHQU + WHSUB + WZPAST + WZPRES + XX0, family = "binomial", 
+    data = df)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8570  -0.1527   0.0000   0.0045   3.3824  
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)  
+(Intercept) -7.116e+00  4.894e+00  -1.454   0.1460  
+PIRE         2.509e+01  1.749e+01   1.435   0.1514  
+PIT         -2.782e-01  6.412e-01  -0.434   0.6643  
+PLACE        2.460e+01  1.623e+01   1.516   0.1296  
+POMD         4.024e+00  1.651e+00   2.437   0.0148 *
+PRED         7.701e-02  4.395e-01   0.175   0.8609  
+PRESP        1.006e+01  5.496e+00   1.831   0.0671 .
+PRIV        -2.126e+00  9.306e-01  -2.285   0.0223 *
+PRMD        -1.537e+00  1.557e+00  -0.988   0.3233  
+PROD         2.464e+01  1.270e+01   1.940   0.0524 .
+PUBV         1.520e+00  1.182e+00   1.286   0.1984  
+RB          -3.086e+00  1.508e+00  -2.046   0.0407 *
+SERE        -1.424e+01  9.090e+00  -1.567   0.1172  
+SMP         -6.703e+00  5.884e+00  -1.139   0.2546  
+SPAU         4.640e+00  2.673e+00   1.736   0.0826 .
+SPIN         2.054e+02  1.195e+04   0.017   0.9863  
+SPP2        -1.751e+00  8.790e-01  -1.992   0.0463 *
+STPR        -9.923e+00  4.845e+00  -2.048   0.0406 *
+SUAV        -5.056e+00  2.615e+00  -1.933   0.0532 .
+SYNE         3.852e+01  8.553e+01   0.450   0.6524  
+THAC        -2.455e-01  8.761e+00  -0.028   0.9776  
+THATD       -8.119e+00  4.159e+00  -1.952   0.0509 .
+THVC         1.294e+00  1.545e+00   0.838   0.4021  
+TIME         1.428e+00  3.146e+00   0.454   0.6499  
+TO           1.523e+00  9.516e-01   1.600   0.1096  
+TOBJ        -6.152e+00  3.987e+00  -1.543   0.1228  
+TPP3         1.859e+00  1.067e+00   1.742   0.0815 .
+TSUB         3.241e+00  4.610e+00   0.703   0.4820  
+VBD          6.632e-01  5.156e-01   1.286   0.1983  
+VPRT         7.550e-01  4.763e-01   1.585   0.1130  
+WHCL        -2.161e+00  3.316e+00  -0.652   0.5145  
+WHOBJ        1.982e+01  2.723e+02   0.073   0.9420  
+WHQU        -1.184e+01  7.001e+00  -1.691   0.0909 .
+WHSUB       -2.106e+00  1.958e+00  -1.076   0.2820  
+WZPAST       6.848e+00  3.896e+00   1.758   0.0788 .
+WZPRES      -8.896e+00  5.602e+00  -1.588   0.1123  
+XX0          7.985e+00  3.386e+00   2.358   0.0184 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 160.810  on 115  degrees of freedom
+Residual deviance:  45.822  on  79  degrees of freedom
+AIC: 119.82
+
+Number of Fisher Scoring iterations: 18
+
+> df <- read.table(file.choose(), header=T, sep="\t", stringsAsFactors = T)
+Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  : 
+  line 11 did not have 19 elements
+> df <- read.table(file.choose(), header=T, sep="\t", stringsAsFactors = T, row.names =1)
+> df
+         British American Russian
+DEATH          2        -       4
+ENEMY         14        9      11
+ILLNESS        8        4       6
+INSANITY       1        1       3
+> df <- read.table(file.choose(), header=T, sep="\t", stringsAsFactors = T, row.names =1)
+> df
+         British American Russian
+DEATH          2        0       4
+ENEMY         14        9      11
+ILLNESS        8        4       6
+INSANITY       1        1       3
+> CHI = chisq.test(df)
+Warning message:
+In chisq.test(df) : Chi-squared approximation may be incorrect
+> CHI
+
+	Pearson's Chi-squared test
+
+data:  df
+X-squared = 4.6086, df = 6, p-value = 0.5949
+
+> df <- read.table(file.choose(), header=T, sep="\t", stringsAsFactors = T, row.names =1)
+> CHI = chisq.test(df)
+> CHI
+
+	Pearson's Chi-squared test
+
+data:  df
+X-squared = 11.153, df = 4, p-value = 0.02489
+
+> RES= CHI$res
+> RES
+                UK   American    Russian
+DEATH   -1.6236362  0.1186345  1.3324234
+ENEMY   -0.2971387 -0.2439994  0.5514583
+ILLNESS  1.7940235  0.1048205 -1.7453580
+> 
+> df <- read.table(file.choose(), header=T, sep="\t", stringsAsFactors = T)
+> summary(df)
+  Concept    Person        TempRef       Intensity          Duration  
+ GLAD :761   1st:1109   Future : 113   Neutral:1081   Inchoative:127  
+ HAPPY:890   2nd:  99   Past   : 306   Strong : 459   Iterative : 46  
+             3rd: 443   Present:1232   Weak   : 111   Punctual  :791  
+                                                      Stative   :687  
+> M = glm(Concept ~ Person     +   TempRef     +  Intensity      +   Duration, data = df, family = "binomial")
+> summary(M)
+
+Call:
+glm(formula = Concept ~ Person + TempRef + Intensity + Duration, 
+    family = "binomial", data = df)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0115  -1.1148   0.6857   1.1065   1.4348  
+
+Coefficients:
+                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)       -0.07859    0.24917  -0.315 0.752468    
+Person2nd          0.67399    0.21893   3.079 0.002080 ** 
+Person3rd          1.15868    0.12951   8.947  < 2e-16 ***
+TempRefPast        0.17560    0.24382   0.720 0.471404    
+TempRefPresent    -0.37775    0.21559  -1.752 0.079746 .  
+IntensityStrong    0.43838    0.11975   3.661 0.000251 ***
+IntensityWeak      0.31452    0.20847   1.509 0.131367    
+DurationIterative  0.01675    0.36111   0.046 0.962992    
+DurationPunctual  -0.13110    0.20215  -0.649 0.516650    
+DurationStative    0.18713    0.20513   0.912 0.361628    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2278.7  on 1650  degrees of freedom
+Residual deviance: 2139.8  on 1641  degrees of freedom
+AIC: 2159.8
+
+Number of Fisher Scoring iterations: 4
+
+> MM = lrm(Concept ~ Person     +   TempRef     +  Intensity      +   Duration, data = df, x = T, y = T)
+Error in lrm(Concept ~ Person + TempRef + Intensity + Duration, data = df,  : 
+  could not find function "lrm"
+> MM
+
+Call:  lrm(formula = Language ~ Experiencer + Experience.Intensity + 
+    Cause.Fine.SubSample.Only, data = df, x = T, y = T)
+
+Coefficients:
+                               Intercept                           Experiencer=2nd  
+                                 1.26002                                   0.05774  
+                         Experiencer=3rd               Experience.Intensity=Strong  
+                                -1.60809                                   0.85980  
+               Experience.Intensity=Weak          Cause.Fine.SubSample.Only=Career  
+                                 0.68654                                  -2.10014  
+ Cause.Fine.SubSample.Only=Entertainment           Cause.Fine.SubSample.Only=Event  
+                                 0.34365                                  -1.17081  
+Cause.Fine.SubSample.Only=Health-Comfort     Cause.Fine.SubSample.Only=Love-Family  
+                                -0.76586                                  -0.86332  
+     Cause.Fine.SubSample.Only=non-coded             Cause.Fine.SubSample.Only=SoA  
+                                11.12526                                  -0.59621  
+         Cause.Fine.SubSample.Only=Thing  
+                                -1.42882  
+
+Degrees of Freedom: Total (i.e. Null);  Residual
+Error in signif(x$null.deviance, digits) : 
+  non-numeric argument to mathematical function
+> library(rms)
+Loading required package: Hmisc
+Loading required package: lattice
+Loading required package: survival
+Loading required package: Formula
+Loading required package: ggplot2
+
+Attaching package: ‘Hmisc’
+
+The following objects are masked from ‘package:base’:
+
+    format.pval, units
+
+Loading required package: SparseM
+
+Attaching package: ‘SparseM’
+
+The following object is masked from ‘package:base’:
+
+    backsolve
+
+Warning messages:
+1: package ‘rms’ was built under R version 3.6.2 
+2: package ‘Hmisc’ was built under R version 3.6.2 
+3: package ‘lattice’ was built under R version 3.6.2 
+4: package ‘survival’ was built under R version 3.6.2 
+5: package ‘Formula’ was built under R version 3.6.2 
+6: package ‘ggplot2’ was built under R version 3.6.2 
+library(rms)
+> MM = lrm(Concept ~ Person     +   TempRef     +  Intensity      +   Duration, data = df, x = T, y = T)
+> MM
+Logistic Regression Model
+ 
+ lrm(formula = Concept ~ Person + TempRef + Intensity + Duration, 
+     data = df, x = T, y = T)
+ 
+                       Model Likelihood     Discrimination    Rank Discrim.    
+                          Ratio Test           Indexes           Indexes       
+ Obs          1651    LR chi2     138.88    R2       0.108    C       0.658    
+  GLAD         761    d.f.             9    g        0.693    Dxy     0.316    
+  HAPPY        890    Pr(> chi2) <0.0001    gr       1.999    gamma   0.338    
+ max |deriv| 4e-11                          gp       0.160    tau-a   0.157    
+                                            Brier    0.228                     
+ 
+                    Coef    S.E.   Wald Z Pr(>|Z|)
+ Intercept          -0.0786 0.2492 -0.32  0.7525  
+ Person=2nd          0.6740 0.2189  3.08  0.0021  
+ Person=3rd          1.1587 0.1295  8.95  <0.0001 
+ TempRef=Past        0.1756 0.2438  0.72  0.4714  
+ TempRef=Present    -0.3777 0.2156 -1.75  0.0797  
+ Intensity=Strong    0.4384 0.1198  3.66  0.0003  
+ Intensity=Weak      0.3145 0.2085  1.51  0.1314  
+ Duration=Iterative  0.0168 0.3611  0.05  0.9630  
+ Duration=Punctual  -0.1311 0.2022 -0.65  0.5166  
+ Duration=Stative    0.1871 0.2051  0.91  0.3616  
+ 
+> vif(MM)
+        Person=2nd         Person=3rd       TempRef=Past    TempRef=Present   Intensity=Strong 
+          1.044281           1.105142           3.119467           3.134356           1.095332 
+    Intensity=Weak Duration=Iterative  Duration=Punctual   Duration=Stative 
+          1.046787           1.331625           3.847351           3.839177 
+> anova(MM)
+                Wald Statistics          Response: Concept 
+
+ Factor     Chi-Square d.f. P     
+ Person      82.86     2    <.0001
+ TempRef     16.40     2    0.0003
+ Intensity   14.08     2    0.0009
+ Duration     8.09     3    0.0443
+ TOTAL      124.23     9    <.0001
+> validate(MM, bw = T, B = 200)
+
+		Backwards Step-down - Original Model
+
+No Factors Deleted
+
+Factors in Final Model
+
+[1] Person    TempRef   Intensity Duration 
+          index.orig training   test optimism index.corrected   n
+Dxy           0.3164   0.3256 0.3066   0.0189          0.2975 200
+R2            0.1078   0.1133 0.1006   0.0128          0.0950 200
+Intercept     0.0000   0.0000 0.0112  -0.0112          0.0112 200
+Slope         1.0000   1.0000 0.9397   0.0603          0.9397 200
+Emax          0.0000   0.0000 0.0157   0.0157          0.0157 200
+D             0.0835   0.0881 0.0776   0.0105          0.0730 200
+U            -0.0012  -0.0012 0.0004  -0.0016          0.0004 200
+Q             0.0847   0.0893 0.0773   0.0120          0.0727 200
+B             0.2284   0.2272 0.2301  -0.0028          0.2312 200
+g             0.6925   0.7069 0.6607   0.0462          0.6463 200
+gp            0.1601   0.1627 0.1535   0.0092          0.1510 200
+
+Factors Retained in Backwards Elimination
+
+ Person TempRef Intensity Duration
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *                         
+ *              *                 
+ *              *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *                 *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *              *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *                 *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *              *                 
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *                 *       
+ *      *       *         *       
+ *      *       *         *       
+ *                                
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *              *                 
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *                 *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+ *      *       *                 
+ *      *       *         *       
+
+Frequencies of Numbers of Factors Retained
+
+  1   2   3   4 
+  1   5  52 142 
+> plot(M)
+Hit <Return> to see next plot: 
+Hit <Return> to see next plot: 
+Hit <Return> to see next plot: 
+Hit <Return> to see next plot: 
+> 
+> df <- read.table(file.choose(), header=T, sep="\t", stringsAsFactors = T)
+> summary(df)
+   MAGAZINE        SEXUALITY  
+ CLOSER:187   NOT SEXUAL:305  
+ COSMO : 70   SEXUAL    : 62  
+ VOGUE :110                   
+> dft= table(df)
+> dft
+        SEXUALITY
+MAGAZINE NOT SEXUAL SEXUAL
+  CLOSER        168     19
+  COSMO          55     15
+  VOGUE          82     28
+> xtab <- table(df)
+> 
+> # check data, to make sure it has worked
+> xtab
+        SEXUALITY
+MAGAZINE NOT SEXUAL SEXUAL
+  CLOSER        168     19
+  COSMO          55     15
+  VOGUE          82     28
+> 
+> CHI = chisq.test(xtab)
+> CHI
+
+	Pearson's Chi-squared test
+
+data:  xtab
+X-squared = 12.806, df = 2, p-value = 0.001657
+
+> # To understand how it works
+> # Observed vs. Expected outcomes
+> O = CHI$observed
+> E = CHI$expected
+> E
+        SEXUALITY
+MAGAZINE NOT SEXUAL   SEXUAL
+  CLOSER  155.40872 31.59128
+  COSMO    58.17439 11.82561
+  VOGUE    91.41689 18.58311
+> O
+        SEXUALITY
+MAGAZINE NOT SEXUAL SEXUAL
+  CLOSER        168     19
+  COSMO          55     15
+  VOGUE          82     28
+> 
+> RES= CHI$res
+> RES
+        SEXUALITY
+MAGAZINE NOT SEXUAL     SEXUAL
+  CLOSER  1.0100252 -2.2401974
+  COSMO  -0.4161922  0.9230985
+  VOGUE  -0.9849052  2.1844822
+> library(FactoMineR)
+Warning message:
+package ‘FactoMineR’ was built under R version 3.6.2 
+> library(explor)
+Warning message:
+package ‘explor’ was built under R version 3.6.2 
+> MCAFac = MCA(df, graph= F)
+> explor(MCAFac)
+Loading required package: shiny
+Warning: package ‘shiny’ was built under R version 3.6.2
+
+Attaching package: ‘shiny’
+
+The following object is masked from ‘package:rms’:
+
+    validate
+
+
+Listening on http://127.0.0.1:7979
+> df <- read.table(file.choose(), header=T, sep=“\t”, stringsAsFactors = T)
+Error: unexpected input in "df <- read.table(file.choose(), header=T, sep=‚"
+> df <- read.table(file.choose(), header=T, sep="\t")
+> MCAFac = MCA(df, graph= F)
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+> df <- read.table(file.choose(), header=T, sep="\t")
+> MCAFac = MCA(df, graph= F)
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+> df <- read.table(file.choose(), header=T, sep="\t")
+> MCAFac = MCA(df, graph= F)
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+> df <- data.frame(Agent_Type = full.data$Agent_Type,
++                  Goal_Plasticity = full.data$Goal_Plasticity,
++                  Goal_Boundedness = full.data$Goal_Boundedness,
++                  Goal_Type = full.data$Goal_Type,
++                  Physicality = full.data$Physicality,
++                  Prefix_Stem,
++                  Theme_Type = full.data$Theme_Type
++ #                 full.data$Prefix,
++ #                 full.data$Stem,
++ #                 full.data$Theme_Number,
++ #                 full.data$Completeness
++                  )
+Error in data.frame(Agent_Type = full.data$Agent_Type, Goal_Plasticity = full.data$Goal_Plasticity,  : 
+  object 'full.data' not found
+> 
+> # check the data
+> 
+> summary(df, stringsAsFactors = T)
+ Goal_Plasticity        Agent_Type    Goal_Boundedness            Theme_Type        Physicality  Prefix          Goal_Type  
+ hard:199        non_sentient:106   bounded   :595     non_material    :296   non-physical:386   na:248   2D          : 60  
+ na  :244        sentient    :659   open_space: 90     solid_material  :237   physical    :379   wy:257   3D          :563  
+ soft:322                           undefined : 80     unbound_material:232                      za:260   non_material:142  
+> # load the data
+> 
+> full.data <- read.table(file.choose(), header=T, sep="\t")
+Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  : 
+  line 765 did not have 7 elements
+> #full.data <- read.table("/home/piotr/Documents/Badania/Usage-based paradigms/Data_analysis/wyroslak_fillload_data.csv", header=T, sep="\t")
+> 
+> Prefix_Stem <-toupper(paste(full.data$Prefix,full.data$Stem, sep = "+"))
+Error in paste(full.data$Prefix, full.data$Stem, sep = "+") : 
+  object 'full.data' not found
+> 
+> df <- data.frame(Agent_Type = full.data$Agent_Type,
++                  Goal_Plasticity = full.data$Goal_Plasticity,
++                  Goal_Boundedness = full.data$Goal_Boundedness,
++                  Goal_Type = full.data$Goal_Type,
++                  Physicality = full.data$Physicality,
++                  Prefix_Stem,
++                  Theme_Type = full.data$Theme_Type
++ #                 full.data$Prefix,
++ #                 full.data$Stem,
++ #                 full.data$Theme_Number,
++ #                 full.data$Completeness
++                  )
+Error in data.frame(Agent_Type = full.data$Agent_Type, Goal_Plasticity = full.data$Goal_Plasticity,  : 
+  object 'full.data' not found
+> 
+> # check the data
+> 
+> summary(df, stringsAsFactors = T)
+ Goal_Plasticity        Agent_Type    Goal_Boundedness            Theme_Type        Physicality  Prefix          Goal_Type  
+ hard:199        non_sentient:106   bounded   :595     non_material    :296   non-physical:386   na:248   2D          : 60  
+ na  :244        sentient    :659   open_space: 90     solid_material  :237   physical    :379   wy:257   3D          :563  
+ soft:322                           undefined : 80     unbound_material:232                      za:260   non_material:142  
+> 
+> 
+> # Perform Multiple Correspondence Analysis - pretty plots
+> 
+> MCAFac = MCA(df, graph= F)
+> 
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+> 
+> full.data <- read.table(file.choose(), header=T, sep="\t")
+Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  : 
+  line 765 did not have 7 elements
+> full.data <- read.table(file.choose(), header=T, sep="\t")
+> # load the data
+> 
+> full.data <- read.table(file.choose(), header=T, sep="\t")
+> #full.data <- read.table("/home/piotr/Documents/Badania/Usage-based paradigms/Data_analysis/wyroslak_fillload_data.csv", header=T, sep="\t")
+> 
+> Prefix_Stem <-toupper(paste(full.data$Prefix,full.data$Stem, sep = "+"))
+> 
+> df <- data.frame(Agent_Type = full.data$Agent_Type,
++                  Goal_Plasticity = full.data$Goal_Plasticity,
++                  Goal_Boundedness = full.data$Goal_Boundedness,
++                  Goal_Type = full.data$Goal_Type,
++                  Physicality = full.data$Physicality,
++                  Prefix_Stem,
++                  Theme_Type = full.data$Theme_Type
++ #                 full.data$Prefix,
++ #                 full.data$Stem,
++ #                 full.data$Theme_Number,
++ #                 full.data$Completeness
++                  )
+> 
+> # check the data
+> 
+> summary(df, stringsAsFactors = T)
+        Agent_Type  Goal_Plasticity   Goal_Boundedness        Goal_Type         Physicality      Prefix_Stem             Theme_Type 
+ non_sentient:106   hard:199        bounded   :595     2D          : 60   non-physical:386   WY+PELNIC : 68   non_material    :296  
+ sentient    :659   na  :244        open_space: 90     3D          :563   physical    :379   ZA+PYCHAC : 67   solid_material  :237  
+                    soft:322        undefined : 80     non_material:142                      ZA+PELNIAC: 66   unbound_material:232  
+                                                                                             ZA+PELNIC : 66                         
+                                                                                             WY+PYCHAC : 65                         
+                                                                                             NA+PELNIC : 64                         
+                                                                                             (Other)   :369                         
+> # Perform Multiple Correspondence Analysis - pretty plots
+> 
+> MCAFac = MCA(df, graph= F)
+> 
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+> df <- read.table(file.choose(), header=T, sep="\t")
+> summary(df)
+                  Plasticity.Boundedness.Type        Agent_Type        Physicality      Prefix_Stem             Theme_Type 
+ soft-bounded-3D                :322          non_sentient:106   non-physical:383   WY+PELNIC : 67   non_material    :293  
+ hard-bounded-3D                :199          sentient    :656   physical    :379   ZA+PYCHAC : 67   solid_material  :237  
+ unknown-undefined-non-material : 77                                                ZA+PELNIC : 66   unbound_material:232  
+ unknown-bounded-2D             : 43                                                WY+PYCHAC : 65                         
+ unknown-open_space-3D          : 41                                                NA+PELNIC : 64                         
+ unknown-open_space-non-material: 34                                                WY+PELNIAC: 64                         
+ (Other)                        : 46                                                (Other)   :369                         
+> table(Plasticity.Boundedness.Type$df)
+Error in table(Plasticity.Boundedness.Type$df) : 
+  object 'Plasticity.Boundedness.Type' not found
+> table(df$Plasticity.Boundedness.Type)
+
+                hard-bounded-3D                 soft-bounded-3D              unknown-bounded-2D    unknown-bounded-non-material 
+                            199                             322                              43                              31 
+          unknown-open_space-2D           unknown-open_space-3D unknown-open_space-non-material  unknown-undefined-non-material 
+                             15                              41                              34                              77 
+> MCAFac = MCA(df, graph= F)
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+> MCAFac = MCA(df, graph= F)
+> plot = HCPC(MCAFac)
+[1] "Click on the graph to cut the tree"
+Error in plot.xy(xy.coords(x, y), type = type, ...) : 
+  plot.new has not been called yet
+> MCAFac = MCA(df, graph= F)
+> plot = HCPC(MCAFac)
+[1] "Click on the graph to cut the tree"
+> MCAFac = MCA(df, graph= F)
+> plot = HCPC(MCAFac)
+[1] "Click on the graph to cut the tree"
+> MCAFac = MCA(df, graph= F)
+> plot = HCPC(MCAFac)
+[1] "Click on the graph to cut the tree"
+Error in plot.xy(xy.coords(x, y), type = type, ...) : 
+  plot.new has not been called yet
+> MCAFac = MCA(df, graph= F)
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+Warning: Error in mapply: zero-length inputs cannot be mixed with those of non-zero length
+  [No stack trace available]
+> MCAFac = MCA(df, graph= F)
+> plot = HCPC(MCAFac)
+[1] "Click on the graph to cut the tree"
+> MCAFac = MCA(df, graph= F)
+> plot = HCPC(MCAFac)
+[1] "Click on the graph to cut the tree"
+> MCA_ADj <- mjca(df, lambda= "adjusted")
+Error in mjca(df, lambda = "adjusted") : could not find function "mjca"
+> plot(MCA_ADj, labels= c(0, 2), col= c("white", "black")) 
+Error in xy.coords(x, y, xlabel, ylabel, log) : 
+  'x' is a list, but does not have components 'x' and 'y'
+> summary(MCA_ADj)
+           Length Class  Mode     
+sv             9  -none- numeric  
+lambda         1  -none- character
+inertia.e      9  -none- numeric  
+inertia.t      1  -none- numeric  
+inertia.et     1  -none- logical  
+levelnames    21  -none- character
+factors       42  -none- character
+levels.n       4  -none- numeric  
+nd             1  -none- numeric  
+nd.max         1  -none- numeric  
+rownames    1647  -none- character
+rowmass     1647  -none- numeric  
+rowdist     1647  -none- numeric  
+rowinertia  1647  -none- numeric  
+rowcoord   13176  -none- numeric  
+rowpcoord  13176  -none- numeric  
+rowctr         1  -none- logical  
+rowcor         1  -none- logical  
+colnames       4  -none- character
+colmass       21  -none- numeric  
+coldist       21  -none- numeric  
+colinertia    21  -none- numeric  
+colcoord     168  -none- numeric  
+colpcoord    168  -none- numeric  
+colctr       168  -none- numeric  
+colcor       168  -none- numeric  
+colsup         1  -none- logical  
+subsetcol      1  -none- logical  
+Burt         441  -none- numeric  
+Burt.upd       1  -none- logical  
+subinertia    16  -none- numeric  
+JCA.iter       2  -none- list     
+indmat         1  -none- logical  
+call           3  -none- call     
+> MCA_ADj <- mjca(df, lambda= "adjusted")
+Error in mjca(df, lambda = "adjusted") : could not find function "mjca"
+> 
+> library(ca)
+> MCA_ADj <- mjca(df, lambda= "adjusted")
+> plot(MCA_ADj, labels= c(0, 2), col= c("white", "black")) 
+> summary(MCA_ADj)
+
+Principal inertias (eigenvalues):
+
+ dim    value      %   cum%   scree plot               
+ 1      0.125620  55.7  55.7  ******************       
+ 2      0.029250  13.0  68.7  ****                     
+ 3      0.011084   4.9  73.6  **                       
+ 4      0.006427   2.9  76.5  *                        
+ 5      0.002520   1.1  77.6                           
+ 6      0.000932   0.4  78.0                           
+ 7      0.000296   0.1  78.1                           
+ 8      0.000150   0.1  78.2                           
+ 9      0.000012   0.0  78.2                           
+ 10     00000000   0.0  78.2                           
+ 11     00000000   0.0  78.2                           
+        -------- -----                                 
+ Total: 0.225421                                       
+
+
+Columns:
+                                                            name   mass  qlt  inr    k=1 cor ctr    k=2 cor ctr  
+1  |                 Plasticity.Boundedness.Type:hard-bounded-3D |   52  442   33 | -227 377  21 |   95  65  16 |
+2  |                 Plasticity.Boundedness.Type:soft-bounded-3D |   85  588   32 | -231 343  36 | -195 244 110 |
+3  |              Plasticity.Boundedness.Type:unknown-bounded-2D |   11  413   40 |  354 221  11 |  330 192  42 |
+4  |    Plasticity.Boundedness.Type:unknown-bounded-non-material |    8  680   39 |  547 604  19 |  194  76  10 |
+5  |           Plasticity.Boundedness.Type:unknown-open_space-2D |    4  479   38 |  234 120   2 |  404 359  22 |
+6  |           Plasticity.Boundedness.Type:unknown-open_space-3D |   11  216   40 |  317 214   9 |   31   2   0 |
+7  | Plasticity.Boundedness.Type:unknown-open_space-non-material |    9  771   41 |  641 605  29 |  335 166  34 |
+8  |  Plasticity.Boundedness.Type:unknown-undefined-non-material |   20  746   42 |  638 739  66 |   65   8   3 |
+9  |                                     Agent_Type:non_sentient |   28  761   48 |  581 462  75 | -469 300 209 |
+10 |                                         Agent_Type:sentient |  172  761    8 |  -94 462  12 |   76 300  34 |
+11 |                                    Physicality:non-physical |  101  799   33 |  391 799 122 |   -1   0   0 |
+12 |                                        Physicality:physical |   99  799   34 | -395 799 124 |    1   0   0 |
+13 |                                        Prefix_Stem:NA+PCHAC |   16  260   38 | -219 205   6 | -113  55   7 |
+14 |                                      Prefix_Stem:NA+PELNIAC |   17  721   42 |  379 237  19 | -542 484 166 |
+15 |                                       Prefix_Stem:NA+PELNIC |   17  413   38 |  -28   3   0 | -336 410  65 |
+16 |                                       Prefix_Stem:NA+PYCHAC |   16  248   37 | -196 243   5 |  -29   5   0 |
+17 |                                        Prefix_Stem:WY+PCHAC |   16  917   39 | -585 909  43 |  -53   7   2 |
+18 |                                      Prefix_Stem:WY+PELNIAC |   17  697   37 |  384 686  20 |  -50  11   1 |
+19 |                                       Prefix_Stem:WY+PELNIC |   18  679   37 |  352 571  17 |  153 107  14 |
+20 |                                       Prefix_Stem:WY+PYCHAC |   17  717   41 | -586 693  47 | -110  24   7 |
+21 |                                        Prefix_Stem:ZA+PCHAC |   16  618   36 | -220 366   6 |  183 252  18 |
+22 |                                      Prefix_Stem:ZA+PELNIAC |   17  418   39 |  289 221  11 |  273 197  43 |
+23 |                                       Prefix_Stem:ZA+PELNIC |   17  634   39 |  273 207  10 |  392 428  91 |
+24 |                                       Prefix_Stem:ZA+PYCHAC |   18  257   37 |   75  33   1 |  193 223  22 |
+25 |                                     Theme_Type:non_material |   77  861   42 |  524 852 168 |  -54   9   8 |
+26 |                                   Theme_Type:solid_material |   62  601   31 | -199 362  20 |  162 239  56 |
+27 |                                 Theme_Type:unbound_material |   61  810   39 | -458 775 102 |  -98  35  20 |
+
+> MCAFac = MCA(df, graph= F)
+> explor(MCAFac)
+
+Listening on http://127.0.0.1:7979
+Warning: Error in mapply: zero-length inputs cannot be mixed with those of non-zero length
+  [No stack trace available]
+> MCA_ADj <- mjca(df, lambda= "burt")
+Error in match.arg(lambda) : 
+  'arg' should be one of “adjusted”, “indicator”, “Burt”, “JCA”
+> MCA_ADj <- mjca(df, lambda= "Burt")
+> summary(MCA_ADj)
+
+Principal inertias (eigenvalues):
+
+ dim    value      %   cum%   scree plot               
+ 1      0.233814  22.1  22.1  ******                   
+ 2      0.113449  10.7  32.8  ***                      
+ 3      0.080785   7.6  40.4  **                       
+ 4      0.069768   6.6  46.9  **                       
+ 5      0.057676   5.4  52.4  *                        
+ 6      0.050363   4.7  57.1  *                        
+ 7      0.045699   4.3  61.4  *                        
+ 8      0.044011   4.2  65.6  *                        
+ 9      0.041115   3.9  69.5  *                        
+ 10     0.040189   3.8  73.3  *                        
+ 11     0.040010   3.8  77.0  *                        
+ 12     0.039182   3.7  80.7  *                        
+ 13     0.037154   3.5  84.2  *                        
+ 14     0.036015   3.4  87.6  *                        
+ 15     0.032609   3.1  90.7  *                        
+ 16     0.029117   2.7  93.5  *                        
+ 17     0.023410   2.2  95.7  *                        
+ 18     0.021073   2.0  97.7                           
+ 19     0.008555   0.8  98.5                           
+ 20     0.008445   0.8  99.3                           
+ 21     0.004198   0.4  99.7                           
+ 22     0.003700   0.3 100.0                           
+        -------- -----                                 
+ Total: 1.060337 100.0                                 
+
+
+Columns:
+                                                            name   mass  qlt  inr    k=1 cor ctr     k=2 cor ctr  
+1  |                 Plasticity.Boundedness.Type:hard-bounded-3D |   52  194   33 | -310 142  21 |   186  51  16 |
+2  |                 Plasticity.Boundedness.Type:soft-bounded-3D |   85  620   32 | -315 250  36 |  -384 370 110 |
+3  |              Plasticity.Boundedness.Type:unknown-bounded-2D |   11  172   40 |  483  61  11 |   649 111  42 |
+4  |    Plasticity.Boundedness.Type:unknown-bounded-non-material |    8  137   39 |  746 109  19 |   381  28  10 |
+5  |           Plasticity.Boundedness.Type:unknown-open_space-2D |    4   71   38 |  319  10   2 |   795  61  22 |
+6  |           Plasticity.Boundedness.Type:unknown-open_space-3D |   11   49   40 |  433  48   9 |    61   1   0 |
+7  | Plasticity.Boundedness.Type:unknown-open_space-non-material |    9  249   41 |  874 158  29 |   660  90  34 |
+8  |  Plasticity.Boundedness.Type:unknown-undefined-non-material |   20  349   42 |  871 341  66 |   127   7   3 |
+9  |                                     Agent_Type:non_sentient |   28  812   48 |  793 345  75 |  -923 467 209 |
+10 |                                         Agent_Type:sentient |  172  812    8 | -128 345  12 |   149 467  34 |
+11 |                                    Physicality:non-physical |  101  810   33 |  533 810 122 |    -2   0   0 |
+12 |                                        Physicality:physical |   99  810   34 | -539 810 124 |     2   0   0 |
+13 |                                        Prefix_Stem:NA+PCHAC |   16   55   38 | -298  35   6 |  -222  20   7 |
+14 |                                      Prefix_Stem:NA+PELNIAC |   17  520   42 |  517  99  19 | -1067 421 166 |
+15 |                                       Prefix_Stem:NA+PELNIC |   17  183   38 |  -38   1   0 |  -661 182  65 |
+16 |                                       Prefix_Stem:NA+PYCHAC |   16   31   37 | -268  30   5 |   -58   1   0 |
+17 |                                        Prefix_Stem:WY+PCHAC |   16  245   39 | -798 241  43 |  -104   4   2 |
+18 |                                      Prefix_Stem:WY+PELNIAC |   17  120   37 |  523 116  20 |   -98   4   1 |
+19 |                                       Prefix_Stem:WY+PELNIC |   18  143   37 |  480 102  17 |   300  40  14 |
+20 |                                       Prefix_Stem:WY+PYCHAC |   17  270   41 | -799 251  47 |  -216  18   7 |
+21 |                                        Prefix_Stem:ZA+PCHAC |   16   91   36 | -301  38   6 |   360  54  18 |
+22 |                                      Prefix_Stem:ZA+PELNIAC |   17  179   39 |  394  63  11 |   538 116  43 |
+23 |                                       Prefix_Stem:ZA+PELNIC |   17  307   39 |  372  58  10 |   772 249  91 |
+24 |                                       Prefix_Stem:ZA+PYCHAC |   18   70   37 |  102   5   1 |   380  66  22 |
+25 |                                     Theme_Type:non_material |   77  904   42 |  715 884 168 |  -106  19   8 |
+26 |                                   Theme_Type:solid_material |   62  331   31 | -272 139  20 |   319 192  56 |
+27 |                                 Theme_Type:unbound_material |   61  635   39 | -625 580 102 |  -193  55  20 |
+
+> ? mjca
+starting httpd help server ... done
+2022-06-05 15:48:53.796 R[10633:5645616] App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app's Info.plist file.
+> summary (df)
+                  Plasticity.Boundedness.Type        Agent_Type        Physicality      Prefix_Stem             Theme_Type 
+ soft-bounded-3D                :322          non_sentient:106   non-physical:383   WY+PELNIC : 67   non_material    :293  
+ hard-bounded-3D                :199          sentient    :656   physical    :379   ZA+PYCHAC : 67   solid_material  :237  
+ unknown-undefined-non-material : 77                                                ZA+PELNIC : 66   unbound_material:232  
+ unknown-bounded-2D             : 43                                                WY+PYCHAC : 65                         
+ unknown-open_space-3D          : 41                                                NA+PELNIC : 64                         
+ unknown-open_space-non-material: 34                                                WY+PELNIAC: 64                         
+ (Other)                        : 46                                                (Other)   :369                         
+> df <- read.table(file.choose(), header=T, sep="\t")
+> summary (df)
+        Agent_Type      Prefix_Stem 
+ non_sentient:106   WY+PELNIC : 68  
+ sentient    :659   ZA+PYCHAC : 67  
+                    ZA+PELNIAC: 66  
+                    ZA+PELNIC : 66  
+                    WY+PYCHAC : 65  
+                    NA+PELNIC : 64  
+                    (Other)   :369  
+> dff= table(df)
+> dff
+              Prefix_Stem
+Agent_Type     NA+PCHAC NA+PELNIAC NA+PELNIC NA+PYCHAC WY+PCHAC WY+PELNIAC WY+PELNIC WY+PYCHAC ZA+PCHAC ZA+PELNIAC ZA+PELNIC ZA+PYCHAC
+  non_sentient        2         38        22         1        1         18         7         2        0          9         4         2
+  sentient           58         25        42        60       59         46        61        63       61         57        62        65
+> 
+> df <- read.table(file.choose(), header=T, sep="\t")
+> summary(df)
+         Lemma                  Verb_type1           Verb_type2   Dynamicity        Transitivity     Agentivity        Person_animacy
+ be DESCRIPT: 65   existence         :94   existence      :94   dynamic:209   intransitive:177   human    :268   1st-animate  :179   
+ have to    : 25   change of state   :65   change of state:65   stative:165   transitive  :197   non-human:106   3rd-animate  : 69   
+ be EXIST   : 21   action verbs      :45   interpersonal  :47                                                    3rd-inanimate:126   
+ be PASSIVE : 17   social interaction:37   cognition      :46                                                                        
+ be LOC     : 12   psych-verbs       :34   action verbs   :45                                                                        
+ get        : 11   motion            :30   motion         :30                                                                        
+ (Other)    :223   (Other)           :69   (Other)        :47                                                                        
+        Intention.Coarse             Intention                    Control      Temporal_marking.Coarse2   Temporal_marking.Coarse1
+ intentional    :153     non-intentional  :221   non-controllable     :198   No-TempMarking:159         No-Temp_Marker:172        
+ non-intentional:221     speaker-intention:136   somewhat controllable: 19   Temp_Marking  :215         ADV           : 83        
+                         subject-intention: 17   speaker-control      :140                              PP            : 63        
+                                                 subject-control      : 17                              CL            : 20        
+                                                                                                        this year     :  4        
+                                                                                                        NP.           :  2        
+                                                                                                        (Other)       : 30        
+  Temporal_marking.Coarse2.1  Temporal_marking.Coarse2.2       Temporal_marking    Temporal_type.Specifcity Temporal_proximity
+ No-Temp_Marker:172          ADV           : 85          No-Temp_Marker:172     No-Temp_Marking:172         distal  : 77      
+ ADV           : 52          CL            : 27          tomorrow      : 15     non-specific   :106         imminent: 44      
+ PP-in         : 16          No-Temp_Marker:172          soon          : 12     specific       : 96         neutral : 53      
+ ADV-soon      : 14          NP            : 26          now           :  9                                 proximal:158      
+ CL-when       : 14          PP            : 64          today         :  6                                 unknown : 42      
+ NP-this       : 13                                      never         :  5                                                   
+ (Other)       : 93                                      (Other)       :155                                                   
+ Temporal_proximity_unknonws_clumped Temporal_proximity_unknonws_clumped.ORD Epistemic_marking.Coarse1     Epistemic_marking Epistemic_marking.Coarse2
+ distal  : 77                        a-imminent: 44                          EP-Marker    :152         No-Ep_Marking:222     No-Ep_Marking:222        
+ imminent: 44                        b-proximal:200                          No-Ep_Marking:222         know         : 12     EP-VERB      : 26        
+ neutral : 53                        c-neutral : 53                                                    think        : 12     COG-VERB     : 23        
+ proximal:200                        d-distal  : 77                                                    hopefully    :  8     EP-ADVERB    : 22        
+                                                                                                       hope         :  5     HOPE         : 16        
+                                                                                                       sure         :  5     EV-VERB      :  5        
+                                                                                                       (Other)      :110     (Other)      : 60        
+ Epistemic_marking.Coarse3          Speaker_certainty Speaker_certainty.somewhat.certain.Clumped Speaker_certainty.c_somewhat.certain.Clumped.ORD
+ No-Ep_Marking:222         highly certain    :259     highly certain    :259                     a_highly uncertain  : 21                        
+ EP-VERB      : 26         highly uncertain  : 21     highly uncertain  : 21                     b_somewhat uncertain: 36                        
+ COG-VERB     : 23         neutral           :  3     somewhat certain  : 58                     c_somewhat certain  : 58                        
+ EP-ADVERB    : 22         somewhat certain  : 55     somewhat uncertain: 36                     d_highly certain    :259                        
+ HOPE         : 16         somewhat uncertain: 36                                                                                                
+ EV-VERB      :  5                                                                                                                               
+ (Other)      : 60                                                                                                                               
+ Speaker_certainty.certain.Clumped.Coarse1 Speaker_certainty.less.certain.Clumped.Coarse2 Actualisation                          Link_to_t0 
+ certain  :317                             highly certain:259                             actual :293   attached (conditions in place): 58  
+ uncertain: 57                             less certain  :115                             virtual: 81   attached (decision taken)     :116  
+                                                                                                        attached (imminent)           : 12  
+                                                                                                        attached (within discourse)   :  2  
+                                                                                                        detached                      :186  
+                                                                                                                                            
+                                                                                                                                            
+ Link_to_t0.Coarse                   Contingency    Contingency.Coarse        Cx            Cx2           Person_animacy.1     Cx.Prs.An      Cx.Prs   
+ attached :188     contingent (any/anyone) :  3   contingent : 47      going_to:189   going_to:189   1st-animate  :179     GT-1st   :113   GT-1st:113  
+ detached :186     contingent (if-clause)  : 34   independent:327      will    :185   will    :185   3rd-animate  : 69     GT-3rd-An: 31   GT-3rd: 76  
+                   contingent (otherwise)  :  3                                                      3rd-inanimate:126     GT-3rd-In: 45   W-1st : 66  
+                   contingent (when-clause):  4                                                                            W-1st    : 66   W-3rd :119  
+                   contingent (X then Y)   :  3                                                                            W-3rd-An : 38               
+                   independent             :327                                                                            W-3rd-In : 81               
+                                                                                                                                                       
+   Cx.Prs.GT1    Cx.Prs.GT3   Cx.Prs.W1    Cx.Prs.W3  
+ GT-1st :113   GT-3rd : 76   NOT-W1:308   NOT-W3:255  
+ NOT-GT1:261   NOT-GT3:298   W-1st : 66   W-3rd :119  
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+> Mlmer = glmer(Cx ~ Temporal_proximity_unknonws_clumped + Intention +  Contingency.Coarse + Speaker_certainty.somewhat.certain.Clumped + Link_to_t0.Coarse + (1 | Person_animacy) + (1 | Verb_type1), family = binomial("logit"), control = glmerControl(optimizer ="Nelder_Mead"), data = df)
+Error in glmer(Cx ~ Temporal_proximity_unknonws_clumped + Intention +  : 
+  could not find function "glmer"
+> library(
++ lme4)
+Loading required package: Matrix
+Warning messages:
+1: package ‘lme4’ was built under R version 3.6.2 
+2: package ‘Matrix’ was built under R version 3.6.2 
+> Mlmer = glmer(Cx ~ Temporal_proximity_unknonws_clumped + Intention +  Contingency.Coarse + Speaker_certainty.somewhat.certain.Clumped + Link_to_t0.Coarse + (1 | Person_animacy) + (1 | Verb_type1), family = binomial("logit"), control = glmerControl(optimizer ="Nelder_Mead"), data = df)
+boundary (singular) fit: see ?isSingular
+> summary(Mlmer)
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: Cx ~ Temporal_proximity_unknonws_clumped + Intention + Contingency.Coarse +      Speaker_certainty.somewhat.certain.Clumped + Link_to_t0.Coarse +  
+    (1 | Person_animacy) + (1 | Verb_type1)
+   Data: df
+Control: glmerControl(optimizer = "Nelder_Mead")
+
+     AIC      BIC   logLik deviance df.resid 
+   461.4    512.4   -217.7    435.4      361 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6059 -0.6661 -0.3587  0.7599  2.4580 
+
+Random effects:
+ Groups         Name        Variance        Std.Dev.  
+ Verb_type1     (Intercept) 0.0000000005369 0.00002317
+ Person_animacy (Intercept) 0.2012464783076 0.44860504
+Number of obs: 374, groups:  Verb_type1, 10; Person_animacy, 3
+
+Fixed effects:
+                                                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                                    0.3148     0.6296   0.500 0.617067    
+Temporal_proximity_unknonws_clumpedimminent                   -1.0830     0.4759  -2.276 0.022860 *  
+Temporal_proximity_unknonws_clumpedneutral                    -0.4509     0.4326  -1.042 0.297198    
+Temporal_proximity_unknonws_clumpedproximal                   -0.8312     0.3215  -2.586 0.009717 ** 
+Intentionspeaker-intention                                     0.6762     0.3248   2.082 0.037342 *  
+Intentionsubject-intention                                     1.6152     0.6289   2.568 0.010217 *  
+Contingency.Coarseindependent                                 -0.7788     0.4127  -1.887 0.059167 .  
+Speaker_certainty.somewhat.certain.Clumpedhighly uncertain    -0.2744     0.5071  -0.541 0.588389    
+Speaker_certainty.somewhat.certain.Clumpedsomewhat certain     1.2410     0.3556   3.490 0.000483 ***
+Speaker_certainty.somewhat.certain.Clumpedsomewhat uncertain   0.2319     0.4056   0.572 0.567535    
+Link_to_t0.Coarsedetached                                      1.1069     0.3034   3.648 0.000264 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                               (Intr) Tmprl_prxmty_nknnws_clmpdm Tmprl_prxmty_nknnws_clmpdn Tmprl_prxmty_nknnws_clmpdp Intntnsp- Intntnsb- Cntn.C
+Tmprl_prxmty_nknnws_clmpdm     -0.338                                                                                                            
+Tmprl_prxmty_nknnws_clmpdn     -0.317  0.337                                                                                                     
+Tmprl_prxmty_nknnws_clmpdp     -0.429  0.545                      0.517                                                                          
+Intntnspkr-                    -0.295 -0.088                     -0.088                     -0.065                                               
+Intntnsbjc-                    -0.170  0.012                     -0.047                     -0.016                      0.163                    
+Cntngncy.Cr                    -0.708  0.064                      0.131                      0.047                      0.106     0.033          
+Spkr_crtnty.smwht.crtn.Clmpdhu -0.075  0.120                      0.118                      0.208                      0.083    -0.018    -0.099
+Spkr_c...Cc                     0.016  0.064                     -0.081                     -0.040                      0.023     0.072    -0.143
+Spkr_crtnty.smwht.crtn.Clmpdsu -0.028 -0.048                     -0.083                     -0.032                      0.023     0.062    -0.007
+Lnk_t_t0.Cr                    -0.558  0.189                     -0.054                      0.141                      0.402     0.240     0.346
+                               Spkr_crtnty.smwht.crtn.Clmpdhu S_...c Spkr_crtnty.smwht.crtn.Clmpdsu
+Tmprl_prxmty_nknnws_clmpdm                                                                         
+Tmprl_prxmty_nknnws_clmpdn                                                                         
+Tmprl_prxmty_nknnws_clmpdp                                                                         
+Intntnspkr-                                                                                        
+Intntnsbjc-                                                                                        
+Cntngncy.Cr                                                                                        
+Spkr_crtnty.smwht.crtn.Clmpdhu                                                                     
+Spkr_c...Cc                     0.128                                                              
+Spkr_crtnty.smwht.crtn.Clmpdsu  0.117                          0.154                               
+Lnk_t_t0.Cr                    -0.093                         -0.052 -0.155                        
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see ?isSingular
+
+> df $ Speaker_certainty.somewhat.certain.Clumped = relevel(df $ Speaker_certainty.somewhat.certain.Clumped, ref= "highly uncertain")
+> Mlmer = glmer(Cx ~ Temporal_proximity_unknonws_clumped + Intention +  Contingency.Coarse + Speaker_certainty.somewhat.certain.Clumped + Link_to_t0.Coarse + (1 | Person_animacy) + (1 | Verb_type1), family = binomial("logit"), control = glmerControl(optimizer ="Nelder_Mead"), data = df)
+boundary (singular) fit: see ?isSingular
+> summary(Mlmer)
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: Cx ~ Temporal_proximity_unknonws_clumped + Intention + Contingency.Coarse +      Speaker_certainty.somewhat.certain.Clumped + Link_to_t0.Coarse +  
+    (1 | Person_animacy) + (1 | Verb_type1)
+   Data: df
+Control: glmerControl(optimizer = "Nelder_Mead")
+
+     AIC      BIC   logLik deviance df.resid 
+   461.4    512.4   -217.7    435.4      361 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.6059 -0.6661 -0.3587  0.7599  2.4582 
+
+Random effects:
+ Groups         Name        Variance       Std.Dev.  
+ Verb_type1     (Intercept) 0.000000006139 0.00007835
+ Person_animacy (Intercept) 0.201367927670 0.44874038
+Number of obs: 374, groups:  Verb_type1, 10; Person_animacy, 3
+
+Fixed effects:
+                                                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                                   0.04071    0.77829   0.052 0.958288    
+Temporal_proximity_unknonws_clumpedimminent                  -1.08300    0.47588  -2.276 0.022859 *  
+Temporal_proximity_unknonws_clumpedneutral                   -0.45080    0.43255  -1.042 0.297327    
+Temporal_proximity_unknonws_clumpedproximal                  -0.83111    0.32145  -2.585 0.009724 ** 
+Intentionspeaker-intention                                    0.67621    0.32477   2.082 0.037333 *  
+Intentionsubject-intention                                    1.61521    0.62886   2.568 0.010215 *  
+Contingency.Coarseindependent                                -0.77867    0.41270  -1.887 0.059192 .  
+Speaker_certainty.somewhat.certain.Clumpedhighly certain      0.27371    0.50705   0.540 0.589337    
+Speaker_certainty.somewhat.certain.Clumpedsomewhat certain    1.51458    0.58079   2.608 0.009113 ** 
+Speaker_certainty.somewhat.certain.Clumpedsomewhat uncertain  0.50563    0.61103   0.828 0.407951    
+Link_to_t0.Coarsedetached                                     1.10698    0.30340   3.649 0.000264 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                               (Intr) Tmprl_prxmty_nknnws_clmpdm Tmprl_prxmty_nknnws_clmpdn Tmprl_prxmty_nknnws_clmpdp Intntnsp- Intntnsb- Cntn.C
+Tmprl_prxmty_nknnws_clmpdm     -0.195                                                                                                            
+Tmprl_prxmty_nknnws_clmpdn     -0.179  0.337                                                                                                     
+Tmprl_prxmty_nknnws_clmpdp     -0.211  0.545                      0.517                                                                          
+Intntnspkr-                    -0.184 -0.088                     -0.088                     -0.065                                               
+Intntnsbjc-                    -0.149  0.012                     -0.047                     -0.016                      0.163                    
+Cntngncy.Cr                    -0.637  0.064                      0.131                      0.047                      0.106     0.033          
+Spkr_crtnty.smwht.crtn.Clmpdhc -0.591 -0.120                     -0.118                     -0.208                     -0.083     0.018     0.099
+Spkr_crtnty.smwht.crtn.Clmpdsc -0.457 -0.065                     -0.153                     -0.207                     -0.058     0.059    -0.001
+Spkr_c...Cu                    -0.455 -0.131                     -0.153                     -0.194                     -0.054     0.056     0.077
+Lnk_t_t0.Cr                    -0.512  0.189                     -0.054                      0.141                      0.402     0.240     0.346
+                               Spkr_crtnty.smwht.crtn.Clmpdhc Spkr_crtnty.smwht.crtn.Clmpdsc S_...u
+Tmprl_prxmty_nknnws_clmpdm                                                                         
+Tmprl_prxmty_nknnws_clmpdn                                                                         
+Tmprl_prxmty_nknnws_clmpdp                                                                         
+Intntnspkr-                                                                                        
+Intntnsbjc-                                                                                        
+Cntngncy.Cr                                                                                        
+Spkr_crtnty.smwht.crtn.Clmpdhc                                                                     
+Spkr_crtnty.smwht.crtn.Clmpdsc  0.795                                                              
+Spkr_c...Cu                     0.752                          0.654                               
+Lnk_t_t0.Cr                     0.093                          0.049                         -0.026
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see ?isSingular
+
+> summary(df)
+         Lemma                  Verb_type1           Verb_type2   Dynamicity        Transitivity     Agentivity        Person_animacy
+ be DESCRIPT: 65   existence         :94   existence      :94   dynamic:209   intransitive:177   human    :268   1st-animate  :179   
+ have to    : 25   change of state   :65   change of state:65   stative:165   transitive  :197   non-human:106   3rd-animate  : 69   
+ be EXIST   : 21   action verbs      :45   interpersonal  :47                                                    3rd-inanimate:126   
+ be PASSIVE : 17   social interaction:37   cognition      :46                                                                        
+ be LOC     : 12   psych-verbs       :34   action verbs   :45                                                                        
+ get        : 11   motion            :30   motion         :30                                                                        
+ (Other)    :223   (Other)           :69   (Other)        :47                                                                        
+        Intention.Coarse             Intention                    Control      Temporal_marking.Coarse2   Temporal_marking.Coarse1
+ intentional    :153     non-intentional  :221   non-controllable     :198   No-TempMarking:159         No-Temp_Marker:172        
+ non-intentional:221     speaker-intention:136   somewhat controllable: 19   Temp_Marking  :215         ADV           : 83        
+                         subject-intention: 17   speaker-control      :140                              PP            : 63        
+                                                 subject-control      : 17                              CL            : 20        
+                                                                                                        this year     :  4        
+                                                                                                        NP.           :  2        
+                                                                                                        (Other)       : 30        
+  Temporal_marking.Coarse2.1  Temporal_marking.Coarse2.2       Temporal_marking    Temporal_type.Specifcity Temporal_proximity
+ No-Temp_Marker:172          ADV           : 85          No-Temp_Marker:172     No-Temp_Marking:172         distal  : 77      
+ ADV           : 52          CL            : 27          tomorrow      : 15     non-specific   :106         imminent: 44      
+ PP-in         : 16          No-Temp_Marker:172          soon          : 12     specific       : 96         neutral : 53      
+ ADV-soon      : 14          NP            : 26          now           :  9                                 proximal:158      
+ CL-when       : 14          PP            : 64          today         :  6                                 unknown : 42      
+ NP-this       : 13                                      never         :  5                                                   
+ (Other)       : 93                                      (Other)       :155                                                   
+ Temporal_proximity_unknonws_clumped Temporal_proximity_unknonws_clumped.ORD Epistemic_marking.Coarse1     Epistemic_marking Epistemic_marking.Coarse2
+ distal  : 77                        a-imminent: 44                          EP-Marker    :152         No-Ep_Marking:222     No-Ep_Marking:222        
+ imminent: 44                        b-proximal:200                          No-Ep_Marking:222         know         : 12     EP-VERB      : 26        
+ neutral : 53                        c-neutral : 53                                                    think        : 12     COG-VERB     : 23        
+ proximal:200                        d-distal  : 77                                                    hopefully    :  8     EP-ADVERB    : 22        
+                                                                                                       hope         :  5     HOPE         : 16        
+                                                                                                       sure         :  5     EV-VERB      :  5        
+                                                                                                       (Other)      :110     (Other)      : 60        
+ Epistemic_marking.Coarse3          Speaker_certainty Speaker_certainty.somewhat.certain.Clumped Speaker_certainty.c_somewhat.certain.Clumped.ORD
+ No-Ep_Marking:222         highly certain    :259     highly uncertain  : 21                     a_highly uncertain  : 21                        
+ EP-VERB      : 26         highly uncertain  : 21     highly certain    :259                     b_somewhat uncertain: 36                        
+ COG-VERB     : 23         neutral           :  3     somewhat certain  : 58                     c_somewhat certain  : 58                        
+ EP-ADVERB    : 22         somewhat certain  : 55     somewhat uncertain: 36                     d_highly certain    :259                        
+ HOPE         : 16         somewhat uncertain: 36                                                                                                
+ EV-VERB      :  5                                                                                                                               
+ (Other)      : 60                                                                                                                               
+ Speaker_certainty.certain.Clumped.Coarse1 Speaker_certainty.less.certain.Clumped.Coarse2 Actualisation                          Link_to_t0 
+ certain  :317                             highly certain:259                             actual :293   attached (conditions in place): 58  
+ uncertain: 57                             less certain  :115                             virtual: 81   attached (decision taken)     :116  
+                                                                                                        attached (imminent)           : 12  
+                                                                                                        attached (within discourse)   :  2  
+                                                                                                        detached                      :186  
+                                                                                                                                            
+                                                                                                                                            
+ Link_to_t0.Coarse                   Contingency    Contingency.Coarse        Cx            Cx2           Person_animacy.1     Cx.Prs.An      Cx.Prs   
+ attached :188     contingent (any/anyone) :  3   contingent : 47      going_to:189   going_to:189   1st-animate  :179     GT-1st   :113   GT-1st:113  
+ detached :186     contingent (if-clause)  : 34   independent:327      will    :185   will    :185   3rd-animate  : 69     GT-3rd-An: 31   GT-3rd: 76  
+                   contingent (otherwise)  :  3                                                      3rd-inanimate:126     GT-3rd-In: 45   W-1st : 66  
+                   contingent (when-clause):  4                                                                            W-1st    : 66   W-3rd :119  
+                   contingent (X then Y)   :  3                                                                            W-3rd-An : 38               
+                   independent             :327                                                                            W-3rd-In : 81               
+                                                                                                                                                       
+   Cx.Prs.GT1    Cx.Prs.GT3   Cx.Prs.W1    Cx.Prs.W3  
+ GT-1st :113   GT-3rd : 76   NOT-W1:308   NOT-W3:255  
+ NOT-GT1:261   NOT-GT3:298   W-1st : 66   W-3rd :119  
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+> Mlmer = glmer(Cx ~ Temporal_proximity_unknonws_clumped + Intention +  Contingency.Coarse + Speaker_certainty.less.certain.Clumped.Coarse2 + Link_to_t0.Coarse + (1 | Person_animacy) + (1 | Verb_type1), family = binomial("logit"), control = glmerControl(optimizer ="Nelder_Mead"), data = df)
+> summary(Mlmer)
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: Cx ~ Temporal_proximity_unknonws_clumped + Intention + Contingency.Coarse +  
+    Speaker_certainty.less.certain.Clumped.Coarse2 + Link_to_t0.Coarse +      (1 | Person_animacy) + (1 | Verb_type1)
+   Data: df
+Control: glmerControl(optimizer = "Nelder_Mead")
+
+     AIC      BIC   logLik deviance df.resid 
+   465.8    509.0   -221.9    443.8      363 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.2410 -0.6787 -0.3437  0.7468  2.3982 
+
+Random effects:
+ Groups         Name        Variance      Std.Dev. 
+ Verb_type1     (Intercept) 0.00000003809 0.0001952
+ Person_animacy (Intercept) 0.19607548054 0.4428041
+Number of obs: 374, groups:  Verb_type1, 10; Person_animacy, 3
+
+Fixed effects:
+                                                           Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                                  0.1839     0.6201   0.297 0.766762    
+Temporal_proximity_unknonws_clumpedimminent                 -1.0905     0.4683  -2.329 0.019885 *  
+Temporal_proximity_unknonws_clumpedneutral                  -0.3133     0.4217  -0.743 0.457467    
+Temporal_proximity_unknonws_clumpedproximal                 -0.7037     0.3096  -2.273 0.023035 *  
+Intentionspeaker-intention                                   0.7345     0.3220   2.281 0.022561 *  
+Intentionsubject-intention                                   1.5526     0.6267   2.477 0.013235 *  
+Contingency.Coarseindependent                               -0.7281     0.4087  -1.782 0.074817 .  
+Speaker_certainty.less.certain.Clumped.Coarse2less certain   0.6267     0.2613   2.398 0.016480 *  
+Link_to_t0.Coarsedetached                                    1.0606     0.2993   3.544 0.000394 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                           (Intr) Tmprl_prxmty_nknnws_clmpdm Tmprl_prxmty_nknnws_clmpdn Tmprl_prxmty_nknnws_clmpdp Intntnsp- Intntnsb- Cntn.C S_...c
+Tmprl_prxmty_nknnws_clmpdm -0.334                                                                                                                   
+Tmprl_prxmty_nknnws_clmpdn -0.305  0.326                                                                                                            
+Tmprl_prxmty_nknnws_clmpdp -0.418  0.536                      0.501                                                                                 
+Intntnspkr-                -0.292 -0.094                     -0.112                     -0.084                                                      
+Intntnsbjc-                -0.172  0.014                     -0.042                     -0.008                      0.168                           
+Cntngncy.Cr                -0.712  0.076                      0.135                      0.048                      0.105     0.031                 
+Sp_...C.C2c                -0.015  0.042                     -0.066                      0.025                      0.050     0.077    -0.148       
+Lnk_t_t0.Cr                -0.565  0.185                     -0.058                      0.145                      0.418     0.233     0.352 -0.154
+> Mlmer = glmer(Cx ~ Temporal_proximity_unknonws_clumped + Intention +  Contingency.Coarse + Speaker_certainty.certain.Clumped.Coarse1 + Link_to_t0.Coarse + (1 | Person_animacy) + (1 | Verb_type1), family = binomial("logit"), control = glmerControl(optimizer ="Nelder_Mead"), data = df)
+Warning message:
+In checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv,  :
+  Model failed to converge with max|grad| = 0.00242606 (tol = 0.002, component 1)
+> summary(Mlmer)
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: Cx ~ Temporal_proximity_unknonws_clumped + Intention + Contingency.Coarse +  
+    Speaker_certainty.certain.Clumped.Coarse1 + Link_to_t0.Coarse +      (1 | Person_animacy) + (1 | Verb_type1)
+   Data: df
+Control: glmerControl(optimizer = "Nelder_Mead")
+
+     AIC      BIC   logLik deviance df.resid 
+   471.2    514.3   -224.6    449.2      363 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.2968 -0.7258 -0.3749  0.7484  2.1818 
+
+Random effects:
+ Groups         Name        Variance      Std.Dev. 
+ Verb_type1     (Intercept) 0.00000001448 0.0001203
+ Person_animacy (Intercept) 0.17772833089 0.4215784
+Number of obs: 374, groups:  Verb_type1, 10; Person_animacy, 3
+
+Fixed effects:
+                                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                          0.2456     0.6126   0.401   0.6885    
+Temporal_proximity_unknonws_clumpedimminent         -1.1588     0.4644  -2.495   0.0126 *  
+Temporal_proximity_unknonws_clumpedneutral          -0.2609     0.4168  -0.626   0.5315    
+Temporal_proximity_unknonws_clumpedproximal         -0.7569     0.3099  -2.443   0.0146 *  
+Intentionspeaker-intention                           0.6976     0.3172   2.199   0.0279 *  
+Intentionsubject-intention                           1.4405     0.6235   2.310   0.0209 *  
+Contingency.Coarseindependent                       -0.5875     0.4013  -1.464   0.1432    
+Speaker_certainty.certain.Clumped.Coarse1uncertain  -0.2128     0.3262  -0.652   0.5142    
+Link_to_t0.Coarsedetached                            1.2205     0.2971   4.108  0.00004 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+                           (Intr) Tmprl_prxmty_nknnws_clmpdm Tmprl_prxmty_nknnws_clmpdn Tmprl_prxmty_nknnws_clmpdp Intntnsp- Intntnsb- Cntn.C
+Tmprl_prxmty_nknnws_clmpdm -0.335                                                                                                            
+Tmprl_prxmty_nknnws_clmpdn -0.312  0.335                                                                                                     
+Tmprl_prxmty_nknnws_clmpdp -0.423  0.537                      0.511                                                                          
+Intntnspkr-                -0.299 -0.101                     -0.110                     -0.087                                               
+Intntnsbjc-                -0.178  0.013                     -0.030                     -0.002                      0.170                    
+Cntngncy.Cr                -0.724  0.081                      0.124                      0.046                      0.120     0.045          
+Spkr_..C.C1                -0.082  0.025                      0.036                      0.114                      0.057     0.021    -0.016
+Lnk_t_t0.Cr                -0.553  0.179                     -0.078                      0.119                      0.415     0.244     0.339
+                           S_..C.
+Tmprl_prxmty_nknnws_clmpdm       
+Tmprl_prxmty_nknnws_clmpdn       
+Tmprl_prxmty_nknnws_clmpdp       
+Intntnspkr-                      
+Intntnsbjc-                      
+Cntngncy.Cr                      
+Spkr_..C.C1                      
+Lnk_t_t0.Cr                -0.166
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00242606 (tol = 0.002, component 1)
+
+> Mlmer = glmer(Cx ~ Temporal_proximity_unknonws_clumped + Intention +  Contingency.Coarse + Speaker_certainty.less.certain.Clumped.Coarse2 + Link_to_t0.Coarse + (1 | Person_animacy) + (1 | Verb_type1), family = binomial("logit"), control = glmerControl(optimizer ="Nelder_Mead"), data = df)
+> library(polytomous) 
+Loading required package: MASS
+Warning message:
+package ‘MASS’ was built under R version 3.6.2 
+> ?polytomous
+> ?glmer
+Warning: dependency ‘cmdstanr’ is not available
+also installing the dependencies ‘processx’, ‘blob’, ‘lifecycle’, ‘rlang’, ‘tidyselect’, ‘gargle’, ‘uuid’, ‘ids’, ‘ellipsis’, ‘vctrs’, ‘callr’, ‘terra’, ‘packrat’, ‘igraph’, ‘broom’, ‘cli’, ‘crayon’, ‘dbplyr’, ‘dplyr’, ‘dtplyr’, ‘forcats’, ‘googledrive’, ‘googlesheets4’, ‘modelr’, ‘pillar’, ‘reprex’, ‘rvest’, ‘tibble’, ‘tidyr’, ‘raster’, ‘wk’, ‘ggridges’, ‘dygraphs’, ‘rsconnect’, ‘shinythemes’, ‘threejs’, ‘xts’, ‘rngtools’, ‘tidyverse’, ‘gamm4’, ‘estimability’, ‘evd’, ‘gsl’, ‘spData’, ‘deldir’, ‘LearnBayes’, ‘gmodels’, ‘s2’, ‘bayesplot’, ‘shinystan’, ‘projpred’, ‘emmeans’, ‘RWiener’, ‘rtdists’, ‘spdep’, ‘splines2’
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/processx_3.5.2.tgz'
+Content type 'application/x-gzip' length 296335 bytes (289 KB)
+==================================================
+downloaded 289 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/blob_1.2.2.tgz'
+Content type 'application/x-gzip' length 45947 bytes (44 KB)
+==================================================
+downloaded 44 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/lifecycle_1.0.1.tgz'
+Content type 'application/x-gzip' length 106032 bytes (103 KB)
+==================================================
+downloaded 103 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/rlang_1.0.1.tgz'
+Content type 'application/x-gzip' length 1754184 bytes (1.7 MB)
+==================================================
+downloaded 1.7 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/tidyselect_1.1.1.tgz'
+Content type 'application/x-gzip' length 199323 bytes (194 KB)
+==================================================
+downloaded 194 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/gargle_1.2.0.tgz'
+Content type 'application/x-gzip' length 501916 bytes (490 KB)
+==================================================
+downloaded 490 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/uuid_1.0-3.tgz'
+Content type 'application/x-gzip' length 46833 bytes (45 KB)
+==================================================
+downloaded 45 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/ids_1.0.1.tgz'
+Content type 'application/x-gzip' length 120799 bytes (117 KB)
+==================================================
+downloaded 117 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/ellipsis_0.3.2.tgz'
+Content type 'application/x-gzip' length 36559 bytes (35 KB)
+==================================================
+downloaded 35 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/vctrs_0.3.8.tgz'
+Content type 'application/x-gzip' length 1417172 bytes (1.4 MB)
+==================================================
+downloaded 1.4 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/callr_3.7.0.tgz'
+Content type 'application/x-gzip' length 438354 bytes (428 KB)
+==================================================
+downloaded 428 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/terra_1.5-17.tgz'
+Content type 'application/x-gzip' length 64032665 bytes (61.1 MB)
+==================================================
+downloaded 61.1 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/packrat_0.7.0.tgz'
+Content type 'application/x-gzip' length 481011 bytes (469 KB)
+==================================================
+downloaded 469 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/igraph_1.2.11.tgz'
+Content type 'application/x-gzip' length 7297809 bytes (7.0 MB)
+==================================================
+downloaded 7.0 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/broom_0.7.12.tgz'
+Content type 'application/x-gzip' length 1794729 bytes (1.7 MB)
+==================================================
+downloaded 1.7 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/cli_3.1.1.tgz'
+Content type 'application/x-gzip' length 1123829 bytes (1.1 MB)
+==================================================
+downloaded 1.1 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/crayon_1.4.2.tgz'
+Content type 'application/x-gzip' length 154763 bytes (151 KB)
+==================================================
+downloaded 151 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/dbplyr_2.1.1.tgz'
+Content type 'application/x-gzip' length 800484 bytes (781 KB)
+==================================================
+downloaded 781 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/dplyr_1.0.8.tgz'
+Content type 'application/x-gzip' length 1297653 bytes (1.2 MB)
+==================================================
+downloaded 1.2 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/dtplyr_1.2.1.tgz'
+Content type 'application/x-gzip' length 328141 bytes (320 KB)
+==================================================
+downloaded 320 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/forcats_0.5.1.tgz'
+Content type 'application/x-gzip' length 353931 bytes (345 KB)
+==================================================
+downloaded 345 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/googledrive_2.0.0.tgz'
+Content type 'application/x-gzip' length 1865476 bytes (1.8 MB)
+==================================================
+downloaded 1.8 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/googlesheets4_1.0.0.tgz'
+Content type 'application/x-gzip' length 484881 bytes (473 KB)
+==================================================
+downloaded 473 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/modelr_0.1.8.tgz'
+Content type 'application/x-gzip' length 200834 bytes (196 KB)
+==================================================
+downloaded 196 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/pillar_1.7.0.tgz'
+Content type 'application/x-gzip' length 742533 bytes (725 KB)
+==================================================
+downloaded 725 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/reprex_2.0.1.tgz'
+Content type 'application/x-gzip' length 490167 bytes (478 KB)
+==================================================
+downloaded 478 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/rvest_1.0.1.tgz'
+Content type 'application/x-gzip' length 198708 bytes (194 KB)
+==================================================
+downloaded 194 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/tibble_3.1.6.tgz'
+Content type 'application/x-gzip' length 846322 bytes (826 KB)
+==================================================
+downloaded 826 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/tidyr_1.2.0.tgz'
+Content type 'application/x-gzip' length 1001230 bytes (977 KB)
+==================================================
+downloaded 977 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/raster_3.5-15.tgz'
+Content type 'application/x-gzip' length 4805811 bytes (4.6 MB)
+==================================================
+downloaded 4.6 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/wk_0.5.0.tgz'
+Content type 'application/x-gzip' length 608066 bytes (593 KB)
+==================================================
+downloaded 593 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/ggridges_0.5.3.tgz'
+Content type 'application/x-gzip' length 2256314 bytes (2.2 MB)
+==================================================
+downloaded 2.2 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/dygraphs_1.1.1.6.tgz'
+Content type 'application/x-gzip' length 427906 bytes (417 KB)
+==================================================
+downloaded 417 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/rsconnect_0.8.16.tgz'
+Content type 'application/x-gzip' length 643198 bytes (628 KB)
+==================================================
+downloaded 628 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/shinythemes_1.2.0.tgz'
+Content type 'application/x-gzip' length 966294 bytes (943 KB)
+==================================================
+downloaded 943 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/threejs_0.3.3.tgz'
+Content type 'application/x-gzip' length 941813 bytes (919 KB)
+==================================================
+downloaded 919 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/xts_0.12.1.tgz'
+Content type 'application/x-gzip' length 930515 bytes (908 KB)
+==================================================
+downloaded 908 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/rngtools_1.5.2.tgz'
+Content type 'application/x-gzip' length 77020 bytes (75 KB)
+==================================================
+downloaded 75 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/tidyverse_1.3.1.tgz'
+Content type 'application/x-gzip' length 421043 bytes (411 KB)
+==================================================
+downloaded 411 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/gamm4_0.2-6.tgz'
+Content type 'application/x-gzip' length 56117 bytes (54 KB)
+==================================================
+downloaded 54 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/estimability_1.3.tgz'
+Content type 'application/x-gzip' length 36369 bytes (35 KB)
+==================================================
+downloaded 35 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/evd_2.3-3.tgz'
+Content type 'application/x-gzip' length 1578562 bytes (1.5 MB)
+==================================================
+downloaded 1.5 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/gsl_1.9-10.3.tgz'
+Content type 'application/x-gzip' length 1572421 bytes (1.5 MB)
+==================================================
+downloaded 1.5 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/spData_2.0.1.tgz'
+Content type 'application/x-gzip' length 3971997 bytes (3.8 MB)
+==================================================
+downloaded 3.8 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/deldir_1.0-6.tgz'
+Content type 'application/x-gzip' length 302971 bytes (295 KB)
+==================================================
+downloaded 295 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/LearnBayes_2.15.1.tgz'
+Content type 'application/x-gzip' length 1023393 bytes (999 KB)
+==================================================
+downloaded 999 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/gmodels_2.18.1.tgz'
+Content type 'application/x-gzip' length 113492 bytes (110 KB)
+==================================================
+downloaded 110 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/s2_1.0.7.tgz'
+Content type 'application/x-gzip' length 11802899 bytes (11.3 MB)
+==================================================
+downloaded 11.3 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/bayesplot_1.8.1.tgz'
+Content type 'application/x-gzip' length 4619179 bytes (4.4 MB)
+==================================================
+downloaded 4.4 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/shinystan_2.5.0.tgz'
+Content type 'application/x-gzip' length 1250738 bytes (1.2 MB)
+==================================================
+downloaded 1.2 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/projpred_2.0.2.tgz'
+Content type 'application/x-gzip' length 1150639 bytes (1.1 MB)
+==================================================
+downloaded 1.1 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/emmeans_1.7.2.tgz'
+Content type 'application/x-gzip' length 1911763 bytes (1.8 MB)
+==================================================
+downloaded 1.8 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/RWiener_1.3-3.tgz'
+Content type 'application/x-gzip' length 119293 bytes (116 KB)
+==================================================
+downloaded 116 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/rtdists_0.11-5.tgz'
+Content type 'application/x-gzip' length 985641 bytes (962 KB)
+==================================================
+downloaded 962 KB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/spdep_1.1-12.tgz'
+Content type 'application/x-gzip' length 5628417 bytes (5.4 MB)
+==================================================
+downloaded 5.4 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/splines2_0.4.5.tgz'
+Content type 'application/x-gzip' length 1891447 bytes (1.8 MB)
+==================================================
+downloaded 1.8 MB
+
+trying URL 'https://cran.uni-muenster.de/bin/macosx/el-capitan/contrib/3.6/brms_2.15.0.tgz'
+Content type 'application/x-gzip' length 5450686 bytes (5.2 MB)
+==================================================
+downloaded 5.2 MB
+
+
+The downloaded binary packages are in
+	/var/folders/83/nwfbydkx60b010lkng3zng740000gn/T//RtmpNQ66Yt/downloaded_packages
+> library(brms)
+Loading required package: Rcpp
+Loading 'brms' package (version 2.15.0). Useful instructions
+can be found by typing help('brms'). A more detailed introduction
+to the package is available through vignette('brms_overview').
+
+Attaching package: ‘brms’
+
+The following object is masked from ‘package:lme4’:
+
+    ngrps
+
+The following object is masked from ‘package:survival’:
+
+    kidney
+
+The following object is masked from ‘package:stats’:
+
+    ar
+
+Warning messages:
+1: package ‘brms’ was built under R version 3.6.2 
+2: package ‘Rcpp’ was built under R version 3.6.2 
+> ?brms
+> 
